@@ -1,10 +1,7 @@
-Image Vote
-==========
+#Image Vote#
 Experimental Node.js server app exposing a RESTful API for uploading own photos and voting for other users´ photos.
 
-Prerequisites
--------------
-
+##Prerequisites##
 Install Node.js
   see http://nodejs.org/
 
@@ -68,6 +65,7 @@ Success response:
 `201, {_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String)]}`
 
 Error responses:
+
 `404, {error: 'User not found'}`
 
 `400, {error: 'Missing photo'}`
@@ -77,11 +75,11 @@ Sample call:
 
 Create Contact Sheet
 --------------------
-The contact sheet holds a collection of photos, and keeps track of how many other photos the user has liked.
+The contact sheet holds a collection of photos, and keeps track of how many other photos the user has voted for (liked).
 
 URL:
 
-`POST /api/sheet
+`POST /api/sheet`
 
 Data params:
 
@@ -89,7 +87,7 @@ Data params:
 
 Success response:
 
-`201, {_id: [String], userId: [String], photos: [Array(String)]}`
+`201, {_id: [String], userId: [String], votesCount: [Number], photos: [Array(String)]}`
 
 Error responses:
 
@@ -102,3 +100,13 @@ Error responses:
 Sample call:
 
 `$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
+
+Get Photos
+----------
+The user can access an array of random photos from other users. By default two photos are returned.
+
+**URL**
+
+Like Photo
+----------
+In the context of a Contact Sheet the user likes other photos.
