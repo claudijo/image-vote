@@ -8,11 +8,16 @@ Install MongoDB
   see https://www.mongodb.org/
 
 Install project dependencies:
+
 `> npm install`
 
-Run database
+Run database:
+
 `> mongod`
 
-Run server:
+Run server
+
 `> node app.js`
+
+
 
