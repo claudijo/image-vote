@@ -28,21 +28,4 @@ exports.create = function(req, res, next) {
   });
 };
 
-exports.update = function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
-    if (err) return next (err);
-    if (!user) {
-      return res.json(404, {error: 'User not found'});
-    }
-    if (!req.remoteUser._id.equals(req.params.id)) {
-      return res.json(403, {error: 'Permission denied'});
-    }
-    user.gender = req.body.gender;
-    user.save(function(err) {
-      if (err) return next(err);
-      res.send(200, user);
-    });
-  });
-};
-
 
