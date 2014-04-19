@@ -29,7 +29,7 @@ All resources have `_id` as id attribute.
 
 Register User
 -------------
-This application require user registration, and all subsequent api calls require Basic Authentication.
+The application enforces user registration. All subsequent api calls require authentication using HTTP Basic authentication.
 
 URL:
 
@@ -53,7 +53,7 @@ Sample call:
 
 Create and upload Photo
 -----------------------
-Users may create and upload photos. An array of created photo objects are provided when creating a contact sheet.
+Users may create and upload photos. An array of created photo ids are provided when creating a contact sheet.
 
 URL:
 
