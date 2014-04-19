@@ -27,7 +27,7 @@ REST API
 ========
 All resources have `_id` as id attribute.
 
-Register user
+Register User
 -------------
 This application require user registration, and all subsequent api calls require Basic Authentication.
 
@@ -41,7 +41,7 @@ Data params:
 
 Success response:
 
-`201, [Newly created user object]`
+`201, {_id: [String], email: [String]}`
 
 Error responses:
 
@@ -49,33 +49,35 @@ Error responses:
 
 Sample call:
 
-`$ curl -i -H "Accept: application/json" -X POST -F email="hello@claudijo.com" -F password="qwerty" http://127.0.0.1:3000/api/users`
+`$ curl -i -H "Accept: application/json" -X POST -F email="hello@example.org" -F password="qwerty" http://127.0.0.1:3000/api/users`
 
-Update user
+Update User
 -----------
 Users may set or change their gender.
 
 URL:
 
-`PUT /api/users`
+`PUT /api/users/:id`
 
 Data params:
 
-`{gender: [enum: ['male', 'femaile']]}`
+`{gender: [enum: ['male', 'female']]}`
 
 Success response:
 
-`200, [User object]`
+`200, {_id: [String], email: [String], gender: [enum: ['male', 'female']]}`
 
 Error responses:
 
 `404, {error: 'User not found'}`
 
+`403, {error: 'Permission denied'}
+
 Sample call:
 
-`$ curl -i -H "Accept: application/json" -X PUT -F gender="male" http://hello%40claudijo.com:qwerty@127.0.0.1:3000/api/users`
+`$ curl -i -H "Accept: application/json" -X PUT -F gender="male" http://hello%40example.org:qwerty@127.0.0.1:3000/api/users/53527f8a96d30b6c094bd57a`
 
-Create and upload photo
+Create and upload Photo
 -----------------------
 Users may create and upload photos. The `_id`s of created photos are provided when creating a contact sheet.
 
