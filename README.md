@@ -28,8 +28,11 @@ REST API
 Crate User
 ----------
 `POST api/users`
+
 Data params:
-`{email: [String (required], password: [String (required)], gender: [enum: 'male' | 'femaile']}’
+
+`{email: [String (required)], password: [String (required)], gender: [enum: 'male' | 'femaile']}`
+
 Success response:
 `201, [User object]`
 
