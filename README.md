@@ -37,7 +37,7 @@ URL:
 
 Data params:
 
-`{email: [String (required)], password: [String (required)], gender: [enum: ['male', 'femaile']]}`
+`{email: [String (required)], password: [String (required)], gender: [enum: ['male', 'female'] (required)]}`
 
 Success response:
 
@@ -49,44 +49,56 @@ Error responses:
 
 Sample call:
 
-`$ curl -i -H "Accept: application/json" -X POST -F email="hello@example.org" -F password="qwerty" http://127.0.0.1:3000/api/users`
+`$ curl -d '{"email":"hello@example.org","password":"qwerty","gender":"male"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://127.0.0.1:3000/api/users`
 
-Update User
------------
-Users may set or change their gender.
+Create and upload Photo
+-----------------------
+Users may create and upload photos. An array of created photo objects are provided when creating a contact sheet.
 
 URL:
 
-`PUT /api/users/:id`
+`POST /api/photos`
 
 Data params:
 
-`{gender: [enum: ['male', 'female']]}`
+`{photo: [binary image file data]}`
 
 Success response:
 
-`200, {_id: [String], email: [String], gender: [enum: ['male', 'female']]}`
+`201, {_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String)]}`
+
+Error responses:
+`404, {error: 'User not found'}`
+
+`400, {error: 'Missing photo'}`
+
+Sample call:
+`$ curl -F photo="@/local/path/to/photo.jpg" -i H "Accept applciation/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
+
+Create Contact Sheet
+--------------------
+The contact sheet holds a collection of photos, and keeps track of how many other photos the user has liked.
+
+URL:
+
+`POST /api/sheet
+
+Data params:
+
+`{photos: [Array(String)]}`
+
+Success response:
+
+`201, {_id: [String], userId: [String], photos: [Array(String)]}`
 
 Error responses:
 
 `404, {error: 'User not found'}`
 
-`403, {error: 'Permission denied'}
+`400, {error: 'Missing photos'}`
+
+`400, {error: 'Minimum of X photos must be provided'}`
 
 Sample call:
 
-`$ curl -i -H "Accept: application/json" -X PUT -F gender="male" http://hello%40example.org:qwerty@127.0.0.1:3000/api/users/53527f8a96d30b6c094bd57a`
-
-Create and upload Photo
------------------------
-Users may create and upload photos. The `_id`s of created photos are provided when creating a contact sheet.
-
-URL:
-`POST /api/photos`
-
-Data params:
-
-`{photo: [binary data of image file]}`
-
-Data params:
-
+`$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
