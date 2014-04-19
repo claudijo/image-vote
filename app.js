@@ -49,7 +49,6 @@ if (process.env.ERROR_ROUTE) {
 app.get('/upload', photo.form);
 app.post('/api/users', user.create);
 app.post('/api/sheet', api.auth, sheet.create);
-app.get('/api/sheet/:id', api.auth, sheet.read);
 app.get('/api/sheet/:id/likes', api.auth, like.read);
 app.post('/api/sheet/:id/likes', api.auth, like.create);
 app.get('/api/photos', api.auth, photo.random);

@@ -39,23 +39,3 @@ exports.create = function(req, res, next) {
     });
   });
 };
-
-exports.read = function(req, res, next) {
-  User.findById(req.remoteUser._id, function(err, user) {
-    if (err) return next(err);
-    if (!user) {
-      return res.json(404, {error: 'User not found'});
-    }
-
-    Sheet.findById(req.params.id, function(err, sheet) {
-      if (err) return next(err);
-      if (!sheet) {
-        return res.json(404, {error: 'Sheet not found'});
-      }
-      if (sheet.userId !== user._id) {
-        return res.json(403);
-      }
-      res.json(200, sheet);
-    });
-  });
-};
