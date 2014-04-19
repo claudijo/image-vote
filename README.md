@@ -1,6 +1,6 @@
 Image Vote
 ==========
-Experimental Node.js / Express app exposing a RESTful API for uploading own photos and voting for other users´ photos.
+Experimental Node.js server app exposing a RESTful API for uploading own photos and voting for other users´ photos.
 
 Prerequisites
 -------------
