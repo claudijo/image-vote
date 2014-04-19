@@ -1,3 +1,7 @@
+Image Vote
+==========
+Simple Node.js / Express app exposing a RESTful API for uploading and voting for photos.
+
 Prerequisites
 -------------
 
@@ -15,9 +19,19 @@ Run database:
 
 `> mongod`
 
-Run server
+Run server:
 
 `> node app.js`
+
+REST API
+========
+Crate User
+----------
+`POST api/users`
+Data params:
+`{email: [String (required], password: [String (required)], gender: [enum: 'male' | 'femaile']}’
+Success response:
+`201, [User object]`
 
 
 
