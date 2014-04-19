@@ -24,7 +24,7 @@ Run server (Default port is 3000):
 All resources have `_id` as id attribute.
 
 ###Register User###
-The application enforces user registration. All subsequent api calls require authentication using HTTP Basic authentication.
+The application enforces user registration. All subsequent API calls require authentication using HTTP Basic authentication.
 
 ####URL####
 `POST /api/users`
@@ -33,7 +33,7 @@ The application enforces user registration. All subsequent api calls require aut
 `{email: [String (required)], password: [String (required)], gender: [enum: ['male', 'female'] (required)]}`
 
 ####Success response####
-`201, {_id: [String], email: [String]}`
+`201, {_id: [String], email: [String], gender: [enum: ['male', 'female']}`
 
 ####Error responses####
 `409, {error: 'Email already registered'}`
@@ -42,7 +42,7 @@ The application enforces user registration. All subsequent api calls require aut
 `$ curl -d '{"email":"hello@example.org","password":"qwerty","gender":"male"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://127.0.0.1:3000/api/users`
 
 ###Create and upload Photo###
-Users may create and upload photos. An array of created photo ids are provided when creating a contact sheet.
+Users may create and upload photos. An array of created photo IDs are provided when later creating a contact sheet.
 
 ####URL####
 `POST /api/photos`
@@ -84,7 +84,7 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
 
 ###Get Photos###
-The user can access an array of random photos from other users. Two photos are returned by default.
+The user can access a list of random photos of other users. Two photos are returned by default.
 
 ####URL####
 `GET /api/photos?count=4`
@@ -96,7 +96,7 @@ The user can access an array of random photos from other users. Two photos are r
 `$ curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
 
 ###Like Photo###
-In the context of a Contact Sheet the user can like other users´ photos. The response indicated how many photos the user needs to like before getting access to request likes for own photos.
+In the context of a Contact Sheet the user can like other users´ photos. The response indicated how many photos the user needs to like before getting access to likes for own photos.
 
 ####URL####
 `POST /api/sheet/:id/likes`
@@ -122,7 +122,7 @@ In the context of a Contact Sheet the user can like other users´ photos. The re
 `$ curl -d '{"_id":"5350eb54f9d135080453428b"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
 
 ###Access likes for own photos###
-Returns results for own photos for created contact sheet or empty content if user has not liked enough of other users´ photos.
+Returns results for photos in own contact sheet or empty content if user has not liked enough of other users´ photos.
 
 ####URL####
 `GET /api/sheet/:id/likes`
@@ -139,9 +139,11 @@ Returns results for own photos for created contact sheet or empty content if use
 
 `403, {error: 'Permission denied'}`
 
-###Sample call####
+####Sample call####
 `curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
 
+##Client considerations##
+The client should store user credentials needed to authenticate. The client should also store the id for the current contact sheet.
 
 
 
