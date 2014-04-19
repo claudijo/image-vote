@@ -1,6 +1,6 @@
 Image Vote
 ==========
-Simple Node.js / Express app exposing a RESTful API for uploading and voting for photos.
+Experimental Node.js / Express app exposing a RESTful API for uploading own photos and voting for other users´ photos.
 
 Prerequisites
 -------------
@@ -13,19 +13,21 @@ Install MongoDB
 
 Install project dependencies:
 
-`> npm install`
+`$ npm install`
 
 Run database:
 
-`> mongod`
+`$ mongod`
 
-Run server:
+Run server (Default port is 3000):
 
-`> node app.js`
+`$ node app.js`
 
 REST API
 ========
-Crate User
+All resources have `_id` as id attribute.
+
+Register User
 ----------
 URL:
 
@@ -37,7 +39,16 @@ Data params:
 
 Success response:
 
-`201, [User object]`
+`201, [Newly created user object]`
+
+Error responses:
+
+`409, {error: 'Email already registered'}`
+
+Sample call:
+
+`$ curl -F email='hello@claudijo.com' -F password='qwerty' http://127.0.0.1:3000/api/users`
+
 
 
 
