@@ -29,10 +29,13 @@ exports.create = function(req, res, next) {
 };
 
 exports.update = function(req, res, next) {
-  User.findById(req.remoteUser._id, function(err, user) {
-    if (err) return next(err);
+  User.findById(req.params.id, function(err, user) {
+    if (err) return next (err);
     if (!user) {
       return res.json(404, {error: 'User not found'});
+    }
+    if (!req.remoteUser._id.equals(req.params.id)) {
+      return res.json(403, {error: 'Permission denied'});
     }
     user.gender = req.body.gender;
     user.save(function(err) {
@@ -41,4 +44,5 @@ exports.update = function(req, res, next) {
     });
   });
 };
+
 
