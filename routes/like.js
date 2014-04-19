@@ -17,7 +17,7 @@ exports.read = function(req, res, next) {
       }
 
       if (!sheet.userId.equals(user._id)) {
-        return res.json(403, {error: 'Permission to sheet denied'});
+        return res.json(403, {error: 'Permission denied'});
       }
 
       Photo.find({
@@ -53,7 +53,7 @@ exports.create = function(req, res, next) {
         return res.json(404, {error: 'Sheet not found'});
       }
       if (!sheet.userId.equals(user._id)) {
-        return res.json(403, {error: 'Permission to sheet denied'});
+        return res.json(403, {error: 'Permission denied'});
       }
 
       Photo.findById(req.body._id, function(err, photo) {
@@ -75,7 +75,7 @@ exports.create = function(req, res, next) {
           sheet.save(function(err) {
             if (err) return next(err);
 
-            var votesLeft = REQUIRED_VOTE_COUNT - sheet.votesCount;
+            var votesLeft = config.requiredVotesCount - sheet.votesCount;
             votesLeft = (votesLeft < 0 ? 0 : votesLeft);
 
             res.send(200, {votesLeft: votesLeft});
