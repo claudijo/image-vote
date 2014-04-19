@@ -27,6 +27,8 @@ REST API
 ========
 Crate User
 ----------
+URL:
+
 `POST api/users`
 
 Data params:
@@ -34,6 +36,7 @@ Data params:
 `{email: [String (required)], password: [String (required)], gender: [enum: ['male', 'femaile']]}`
 
 Success response:
+
 `201, [User object]`
 
 
