@@ -22,7 +22,8 @@ var userSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female']
+    enum: ['male', 'female'],
+    required: true
   }
 });
 
