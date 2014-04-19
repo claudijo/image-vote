@@ -40,7 +40,7 @@ exports.create = function(photosFullDir, photosPublicDir) {
       var userDir = path.join(photosFullDir, user.id);
 
       if(!img.size) {
-        res.send(400, {error: 'Missing image'});
+        res.send(400, {error: 'Missing photo'});
       }
 
       mkdirp(userDir, function(err) {
