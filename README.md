@@ -69,7 +69,7 @@ Success response:
 
 Error responses:
 
-`404, {error: 'User not found'}
+`404, {error: 'User not found'}`
 
 Sample call:
 
