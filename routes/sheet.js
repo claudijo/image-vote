@@ -11,7 +11,7 @@ exports.create = function(req, res, next) {
     }
 
     if (!Array.isArray(req.body.photos)) {
-      return res.json(400, {error: 'Missing array of photos'});
+      return res.json(400, {error: 'Missing photos'});
     }
 
     if (req.body.photos.length < config.minPhotosPerSheet) {
