@@ -16,6 +16,7 @@ exports.create = function(req, res, next) {
         if (err) return next(err);
         User.create({
           email: data.email,
+          gender: data.gender,
           password: hash,
           salt: salt
         }, function(err, user) {
