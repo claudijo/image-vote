@@ -27,13 +27,13 @@ REST API
 ========
 All resources have `_id` as id attribute.
 
-Register User
+Register user
 -------------
-This application user registration, and all subsequent api calls require basic Authentication.
+This application require user registration, and all subsequent api calls require Basic Authentication.
 
 URL:
 
-`POST api/users`
+`POST /api/users`
 
 Data params:
 
@@ -51,13 +51,13 @@ Sample call:
 
 `$ curl -i -H "Accept: application/json" -X POST -F email="hello@claudijo.com" -F password="qwerty" http://127.0.0.1:3000/api/users`
 
-Update User
+Update user
 -----------
 Users may set or change their gender.
 
 URL:
 
-`PUT api/users`
+`PUT /api/users`
 
 Data params:
 
@@ -74,4 +74,17 @@ Error responses:
 Sample call:
 
 `$ curl -i -H "Accept: application/json" -X PUT -F gender="male" http://hello%40claudijo.com:qwerty@127.0.0.1:3000/api/users`
+
+Create and upload photo
+-----------------------
+Users may create and upload photos. The `_id`s of created photos are provided when creating a contact sheet.
+
+URL:
+`POST /api/photos`
+
+Data params:
+
+`{photo: [binary data of image file]}`
+
+Data params:
 
