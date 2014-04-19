@@ -143,7 +143,7 @@ Returns results for photos in own contact sheet or empty content if user has not
 `curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
 
 ##Client considerations##
-The client should store user credentials needed to authenticate. The client should also store the ID for the current contact sheet.
+The client should store user credentials needed to authenticate. The client should also store the ID for its current contact sheet.
 
 
 
