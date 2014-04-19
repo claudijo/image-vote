@@ -27,42 +27,33 @@ All resources have `_id` as id attribute.
 The application enforces user registration. All subsequent api calls require authentication using HTTP Basic authentication.
 
 ####URL####
-
 `POST /api/users`
 
 ####Data params####
-
 `{email: [String (required)], password: [String (required)], gender: [enum: ['male', 'female'] (required)]}`
 
 ####Success response####
-
 `201, {_id: [String], email: [String]}`
 
 ####Error responses####
-
 `409, {error: 'Email already registered'}`
 
 ####Sample call####
-
 `$ curl -d '{"email":"hello@example.org","password":"qwerty","gender":"male"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://127.0.0.1:3000/api/users`
 
 ###Create and upload Photo###
 Users may create and upload photos. An array of created photo ids are provided when creating a contact sheet.
 
 ####URL####
-
 `POST /api/photos`
 
 ####Data params####
-
 `{photo: [binary image file data]}`
 
 ####Success response####
-
 `201, {_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String)]}`
 
 ####Error responses####
-
 `404, {error: 'User not found'}`
 
 `400, {error: 'Missing photo'}`
@@ -80,11 +71,9 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `{photos: [Array(String)]}`
 
 ####Success response####
-
 `201, {_id: [String], userId: [String], votesCount: [Number], photos: [Array(String)]}`
 
 ####Error responses####
-
 `404, {error: 'User not found'}`
 
 `400, {error: 'Missing photos'}`
@@ -92,14 +81,67 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `400, {error: 'Minimum of X photos must be provided'}`
 
 ####Sample call####
-
 `$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
 
 ###Get Photos###
 The user can access an array of random photos from other users. Two photos are returned by default.
 
 ####URL####
-`POST /api/sheet`
+`GET /api/photos?count=4`
+
+####Success response####
+`200, [{_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String]}, ...]`
+
+####Sample call####
+`$ curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
 
 ###Like Photo###
-In the context of a Contact Sheet the user likes other photos.
+In the context of a Contact Sheet the user can like other users´ photos. The response indicated how many photos the user needs to like before getting access to request likes for own photos.
+
+####URL####
+`POST /api/sheet/:id/likes`
+
+####Data params####
+`{_id: [String]}`
+
+####Success response####
+`200, {votesLeft: [Number]}`
+
+####Error responses####
+`404, {error: 'User not found'}`
+
+`404, {error: 'Sheet not found'}`
+
+`403, {error: 'Permission to sheet denied'`
+
+`404, {error: 'Photo not found'}`
+
+`400, {error: 'Photo already liked by user'}`
+
+####Sample call####
+`$ curl -d '{"_id":"5350eb54f9d135080453428b"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
+
+###Access likes for own photos###
+Returns results for own photos for created contact sheet or empty content if user has not liked enough of other users´ photos.
+
+####URL####
+`GET /api/sheet/:id/likes`
+
+####Success response####
+`304`
+
+`200, [{_id: [Number], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String]}]`
+
+####Error responses####
+`404, {error: 'User not found'}`
+
+`404, {error: 'Sheet not found'}`
+
+`403, {error: 'Permission denied'}`
+
+###Sample call####
+`curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
+
+
+
+
