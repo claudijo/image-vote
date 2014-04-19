@@ -21,7 +21,7 @@ Run server (Default port is 3000):
 `$ node app.js`
 
 ##REST API##
-All resources have `_id` as id attribute.
+All resources have `_id` as ID attribute.
 
 ###Register User###
 The application enforces user registration. All subsequent API calls require authentication using HTTP Basic authentication.
@@ -96,7 +96,7 @@ The user can access a list of random photos of other users. Two photos are retur
 `$ curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
 
 ###Like Photo###
-In the context of a Contact Sheet the user can like other users´ photos. The response indicated how many photos the user needs to like before getting access to likes for own photos.
+In the context of a Contact Sheet the user can like other users´ photos. The response indicates how many photos the user needs to like before getting access to likes for own photos.
 
 ####URL####
 `POST /api/sheet/:id/likes`
@@ -143,7 +143,7 @@ Returns results for photos in own contact sheet or empty content if user has not
 `curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
 
 ##Client considerations##
-The client should store user credentials needed to authenticate. The client should also store the id for the current contact sheet.
+The client should store user credentials needed to authenticate. The client should also store the ID for the current contact sheet.
 
 
 
