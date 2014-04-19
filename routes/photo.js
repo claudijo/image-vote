@@ -36,7 +36,7 @@ exports.create = function(photosFullDir, photosPublicDir) {
         return res.json(404, {error: 'User not found'});
       }
 
-      var img = req.files.photo.image;
+      var img = req.files.photo;
       var userDir = path.join(photosFullDir, user.id);
 
       if(!img.size) {
