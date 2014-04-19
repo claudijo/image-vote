@@ -74,11 +74,9 @@ Users may create and upload photos. An array of created photo ids are provided w
 The contact sheet holds a collection of photos, and keeps track of how many other photos the user has voted for (liked).
 
 ####URL####
-
 `POST /api/sheet`
 
 ####Data params####
-
 `{photos: [Array(String)]}`
 
 ####Success response####
@@ -98,9 +96,10 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
 
 ###Get Photos###
-The user can access an array of random photos from other users. By default two photos are returned.
+The user can access an array of random photos from other users. Two photos are returned by default.
 
 ####URL####
+`POST /api/sheet`
 
 ###Like Photo###
 In the context of a Contact Sheet the user likes other photos.
