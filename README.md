@@ -1,7 +1,7 @@
-#Image Vote#
+# Image Vote
 Experimental Node.js server app exposing a RESTful API for uploading own photos and voting for other users´ photos.
 
-##Prerequisites##
+## Prerequisites
 Install Node.js
   see http://nodejs.org/
 
@@ -20,10 +20,10 @@ Run server (Default port is 3000):
 
 `$ node app.js`
 
-##REST API##
+## REST API
 All resources have `_id` as ID attribute.
 
-###Register User###
+### Register User
 The application enforces user registration. All subsequent API calls require authentication using HTTP Basic authentication.
 
 ####URL####
