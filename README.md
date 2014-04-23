@@ -95,7 +95,7 @@ The user can access a list of random photos of other users. Two photos are retur
 #### Sample call
 `$ curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
 
-###L ike Photo
+### Like Photo
 In the context of a Contact Sheet the user can like other users´ photos. The response indicates how many photos the user needs to like before getting access to likes for own photos.
 
 #### URL
