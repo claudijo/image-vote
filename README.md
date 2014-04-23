@@ -59,7 +59,7 @@ Users may create and upload photos. An array of created photo IDs are provided w
 `400, {error: 'Missing photo'}`
 
 ####Sample call####
-`$ curl -F photo="@/local/path/to/photo.jpg" -i H "Accept applciation/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
+`$ curl -F photo="@/local/path/to/photo.jpg" -i -H "Accept applciation/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
 
 ###Create Contact Sheet###
 The contact sheet holds a collection of photos, and keeps track of how many other photos the user has voted for (liked).
