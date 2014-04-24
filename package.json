@@ -14,6 +14,7 @@
     "basic-auth": "0.0.1",
     "tmp": "0.0.23",
     "mkdirp": "^0.3.5",
-    "connect-multiparty": "^1.0.3"
+    "connect-multiparty": "^1.0.3",
+    "ncp": "^0.5.1"
   }
 }

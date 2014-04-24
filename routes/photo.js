@@ -1,5 +1,6 @@
 var tmp = require('tmp');
 var mkdirp = require('mkdirp');
+var ncp = require('ncp').ncp;
 var path = require('path');
 var Photo = require('../models/photo');
 var User = require('../models/user');
@@ -28,7 +29,6 @@ exports.random = function(req, res, next) {
   });
 };
 
-// TODO: Delete all req.files when done. See https://github.com/andrewrk/connect-multiparty
 exports.create = function(photosFullDir, photosPublicDir) {
   return function(req, res, next) {
     User.findById(req.remoteUser._id, function(err, user) {
@@ -55,23 +55,30 @@ exports.create = function(photosFullDir, photosPublicDir) {
         }, function(err, destPath) {
           if (err) return next(err);
 
-          fs.rename(img.path, destPath, function(err) {
+          ncp(img.path, destPath, function(err) {
             if (err) return next(err);
 
             Photo.create({
               path: path.join(photosPublicDir, user.id, path.basename(destPath)),
               userId: user._id,
               gender: user.gender
-            }, function(createError, photo) {
-              if (createError) {
-                fs.unlink(destPath, function(unlinkError) {
-                  if (unlinkError) return next(unlinkError);
-
-                  next(createError);
-                });
-              } else {
-                res.send(201, photo);
+            }, function(err, photo) {
+              // Remove all uploaded tmp files.
+              var filePath;
+              for (var file in req.files) {
+                if (req.files.hasOwnProperty(file)) {
+                  filePath = req.files[file].path;
+                  fs.unlink(filePath, function(err) {
+                    if (err) {
+                      console.error('Error deleting file', filePath, err);
+                    }
+                  });
+                }
               }
+
+              if (err) return next(err);
+
+              res.send(201, photo);
             });
           });
         });
