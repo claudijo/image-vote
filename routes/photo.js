@@ -28,6 +28,7 @@ exports.random = function(req, res, next) {
   });
 };
 
+// TODO: Delete all req.files when done. See https://github.com/andrewrk/connect-multiparty
 exports.create = function(photosFullDir, photosPublicDir) {
   return function(req, res, next) {
     User.findById(req.remoteUser._id, function(err, user) {

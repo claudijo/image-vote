@@ -1,4 +1,5 @@
 var express = require('express');
+var multipart = require('connect-multiparty');
 var api = require('./routes/api');
 var user = require('./routes/user');
 var photo = require('./routes/photo');
@@ -10,6 +11,7 @@ var path = require('path');
 var db = require('./models/db');
 
 var app = express();
+var multipartMiddleware = multipart();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -26,7 +28,8 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.bodyParser());
+app.use(express.urlencoded())
+app.use(express.json())
 app.use(app.router);
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,7 +55,7 @@ app.post('/api/sheet', api.auth, sheet.create);
 app.get('/api/sheet/:id/likes', api.auth, like.read);
 app.post('/api/sheet/:id/likes', api.auth, like.create);
 app.get('/api/photos', api.auth, photo.random);
-app.post('/api/photos', api.auth, photo.create(app.get('photosFullDir'), app.get('photosPublicDir')));
+app.post('/api/photos', api.auth, multipartMiddleware, photo.create(app.get('photosFullDir'), app.get('photosPublicDir')));
 
 
 http.createServer(app).listen(app.get('port'), function(){
