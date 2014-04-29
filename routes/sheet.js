@@ -7,15 +7,15 @@ exports.create = function(req, res, next) {
   User.findById(req.remoteUser._id, function(err, user) {
     if (err) return next(err);
     if (!user) {
-      return res.json(404, {error: 'User not found'});
+      return res.json(404, {message: 'User not found'});
     }
 
     if (!Array.isArray(req.body.photos)) {
-      return res.json(400, {error: 'Missing photos'});
+      return res.json(400, {message: 'Missing photos'});
     }
 
     if (req.body.photos.length < config.minPhotosPerSheet) {
-      return res.json(400, {error: 'Minimum of ' + config.minPhotosPerSheet +
+      return res.json(400, {message: 'Minimum of ' + config.minPhotosPerSheet +
           ' photos must be provided'});
     }
 
@@ -26,7 +26,7 @@ exports.create = function(req, res, next) {
     }, function(err, photos) {
       if (err) return next(err);
       if (photos.length < req.body.photos.length) {
-        return res.json(400, {error: 'Missing photo'});
+        return res.json(400, {message: 'Missing photo'});
       }
 
       Sheet.create({

@@ -7,17 +7,17 @@ exports.read = function(req, res, next) {
   User.findById(req.remoteUser._id, function(err, user) {
     if (err) return next(err);
     if (!user) {
-      return res.json(404, {error: 'User not found'});
+      return res.json(404, {message: 'User not found'});
     }
 
     Sheet.findById(req.params.id, function(err, sheet) {
       if (err) return next(err);
       if (!sheet) {
-        return res.json(404, {error: 'Sheet not found'});
+        return res.json(404, {message: 'Sheet not found'});
       }
 
       if (!sheet.userId.equals(user._id)) {
-        return res.json(403, {error: 'Permission denied'});
+        return res.json(403, {message: 'Permission denied'});
       }
 
       Photo.find({
@@ -44,26 +44,26 @@ exports.create = function(req, res, next) {
   User.findById(req.remoteUser._id, function(err, user) {
     if (err) return next(err);
     if (!user) {
-      return res.json(404, {error: 'User not found'});
+      return res.json(404, {message: 'User not found'});
     }
 
     Sheet.findById(req.params.id, function(err, sheet) {
       if (err) return next(err);
       if (!sheet) {
-        return res.json(404, {error: 'Sheet not found'});
+        return res.json(404, {message: 'Sheet not found'});
       }
       if (!sheet.userId.equals(user._id)) {
-        return res.json(403, {error: 'Permission denied'});
+        return res.json(403, {message: 'Permission denied'});
       }
 
       Photo.findById(req.body._id, function(err, photo) {
         if (err) return next(err);
         if (!photo) {
-          return res.json(404, {error: 'Photo not found'});
+          return res.json(404, {message: 'Photo not found'});
         }
 
         if (photo.likedBy.indexOf(user._id) !== -1) {
-          return res.json(400, {error: 'Photo already liked by user'});
+          return res.json(400, {message: 'Photo already liked by user'});
         }
 
         photo.likedBy.push(user._id);

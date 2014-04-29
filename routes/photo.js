@@ -12,7 +12,7 @@ exports.random = function(req, res, next) {
   User.findById(req.remoteUser._id, function(err, user) {
     if (err) return next(err);
     if (!user) {
-      return res.json(404, {error: 'User not found'});
+      return res.json(404, {message: 'User not found'});
     }
 
     var preferredGender = (user.gender === 'female' ? 'male' : 'female');
@@ -34,14 +34,14 @@ exports.create = function(photosFullDir, photosPublicDir) {
     User.findById(req.remoteUser._id, function(err, user) {
       if (err) return next(err);
       if (!user) {
-        return res.json(404, {error: 'User not found'});
+        return res.json(404, {message: 'User not found'});
       }
 
       var img = req.files.photo;
       var userDir = path.join(photosFullDir, user.id);
 
       if(!img.size) {
-        res.send(400, {error: 'Missing photo'});
+        res.json(400, {message: 'Missing photo'});
       }
 
       mkdirp(userDir, function(err) {

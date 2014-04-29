@@ -6,7 +6,7 @@ exports.notfound = function(req, res){
       });
     },
     json: function(){
-      res.send({ error: 'Resource not found' });
+      res.json(404, { message: 'Resource not found' });
     },
     xml: function() {
       res.write('<error>\n');
@@ -40,7 +40,7 @@ exports.internalError = function(err, req, res, next) {
       });
     },
     json: function() {
-      res.send({error: msg});
+      res.json(res.statusCode, {message: msg});
     },
     text: function() {
       res.send(msg + '\n');

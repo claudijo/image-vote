@@ -8,7 +8,7 @@ exports.create = function(req, res, next) {
   User.findOne({email: data.email}, function(err, user) {
     if (err) return next(err);
     if (user) {
-      return res.json(409, { error: 'Email already registered'});
+      return res.json(409, { message: 'Email already registered'});
     }
     bcrypt.genSalt(SALT_LENGTH, function(err, salt) {
       if (err) return next(err);
