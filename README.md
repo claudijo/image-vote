@@ -51,7 +51,7 @@ Users may create and upload photos. An array of created photo IDs are provided w
 `{photo: [binary image file data]}`
 
 #### Success response
-`201, {_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String)]}`
+`201, {_id: [String], path: [String], userId: [String], displayCount: [Number], likedBy: [Array(String)]}`
 
 #### Error responses
 `404, {message: 'User not found'}`
@@ -90,7 +90,7 @@ The user can access a list of random photos of other users. Two photos are retur
 `GET /api/photos?count=4`
 
 #### Success response
-`200, [{_id: [String], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String]}, ...]`
+`200, [{_id: [String], path: [String], userId: [String], displayCount: [Number], likedBy: [Array(String]}, ...]`
 
 #### Sample call
 `$ curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/photos`
@@ -130,7 +130,7 @@ Returns results for photos in own contact sheet or empty content if user has not
 #### Success responses
 `304`
 
-`200, [{_id: [Number], path: [String], userId: [String], displaysCount: [Number], likedBy: [Array(String]}]`
+`200, [{_id: [Number], path: [String], userId: [String], displayCount: [Number], likedBy: [Array(String]}]`
 
 #### Error responses
 `404, {message: 'User not found'}`

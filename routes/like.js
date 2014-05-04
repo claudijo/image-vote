@@ -27,7 +27,7 @@ exports.read = function(req, res, next) {
       }, function(err, photos) {
         var done = true;
         photos.forEach(function(photo) {
-          if (photo.displaysCount < config.requiredVotesCount) {
+          if (photo.displayCount < config.requiredVotesCount) {
             done = false;
           }
         });

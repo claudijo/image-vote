@@ -9,7 +9,7 @@ var getRandCoords = function() {
 
 var createRandomPhotosQuery = function(opts) {
   var query = {
-    displaysCount: {$lt: config.maxDisplaysPerPhoto},
+    displayCount: {$lt: config.maxDisplaysPerPhoto},
     gender: opts.preferredGender,
     $and: [{
       userId: {$ne: opts.userId}
@@ -46,7 +46,7 @@ var photoSchema = new Schema({
     type: [Schema.Types.ObjectId],
     default: []
   },
-  displaysCount: {
+  displayCount: {
     type: Number,
     default: 0
   },
@@ -76,7 +76,7 @@ photoSchema.statics.getRandomPhotos = function(opts, fn) {
   opts.photos = opts.photos || [];
 
   var query = createRandomPhotosQuery(opts);
-  var update = { $inc: { displaysCount: 1 } };
+  var update = { $inc: { displayCount: 1 } };
 
   mongoose.model('Photo').findOneAndUpdate(query, update, function(err, photo) {
     if (err) return fn(err);
