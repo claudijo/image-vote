@@ -6,7 +6,7 @@ var sheetSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
-  votesCount: {
+  voteCount: {
     type: Number,
     default: 0
   },

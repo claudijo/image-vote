@@ -71,7 +71,7 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `{photos: [Array(String)]}`
 
 #### Success response
-`201, {_id: [String], userId: [String], votesCount: [Number], photos: [Array(String)]}`
+`201, {_id: [String], userId: [String], voteCount: [Number], photos: [Array(String)]}`
 
 #### Error responses
 `404, {message: 'User not found'}`

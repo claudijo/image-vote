@@ -27,7 +27,7 @@ exports.read = function(req, res, next) {
       }, function(err, photos) {
         var done = true;
         photos.forEach(function(photo) {
-          if (photo.displayCount < config.requiredVotesCount) {
+          if (photo.displayCount < config.requiredVoteCount) {
             done = false;
           }
         });
@@ -71,11 +71,11 @@ exports.create = function(req, res, next) {
         photo.save(function(err) {
           if (err) return next(err);
 
-          sheet.votesCount += 1;
+          sheet.voteCount += 1;
           sheet.save(function(err) {
             if (err) return next(err);
 
-            var votesLeft = config.requiredVotesCount - sheet.votesCount;
+            var votesLeft = config.requiredVoteCount - sheet.voteCount;
             votesLeft = (votesLeft < 0 ? 0 : votesLeft);
 
             res.send(200, {votesLeft: votesLeft});
