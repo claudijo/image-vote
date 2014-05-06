@@ -56,7 +56,7 @@ exports.create = function(req, res, next) {
         return res.json(403, {message: 'Permission denied'});
       }
 
-      Photo.findById(req.body._id, function(err, photo) {
+      Photo.findById(req.body.photoId, function(err, photo) {
         if (err) return next(err);
         if (!photo) {
           return res.json(404, {message: 'Photo not found'});

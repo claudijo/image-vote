@@ -102,7 +102,7 @@ In the context of a Contact Sheet the user can like other users´ photos. The re
 `POST /api/sheets/:id/likes`
 
 #### Data params
-`{_id: [String]}`
+`{photoId: [String]}`
 
 #### Success response
 `200, {votesLeft: [Number]}`
