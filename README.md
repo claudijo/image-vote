@@ -65,7 +65,7 @@ Users may create and upload photos. An array of created photo IDs are provided w
 The contact sheet holds a collection of photos, and keeps track of how many other photos the user has voted for (liked).
 
 #### URL#
-`POST /api/sheet`
+`POST /api/sheets`
 
 #### Data params
 `{photoIds: [Array(String)]}`
@@ -81,7 +81,7 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `400, {message: 'Minimum of X photos must be provided'}`
 
 #### Sample call
-`$ curl -d '{"photoIds":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
+`$ curl -d '{"photoIds":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheets`
 
 ### Get Photos
 The user can access a list of random photos of other users. Two photos are returned by default.
@@ -99,7 +99,7 @@ The user can access a list of random photos of other users. Two photos are retur
 In the context of a Contact Sheet the user can like other users´ photos. The response indicates how many photos the user needs to like before getting access to likes for own photos.
 
 #### URL
-`POST /api/sheet/:id/likes`
+`POST /api/sheets/:id/likes`
 
 #### Data params
 `{_id: [String]}`
@@ -119,13 +119,13 @@ In the context of a Contact Sheet the user can like other users´ photos. The re
 `400, {message: 'Photo already liked by user'}`
 
 #### Sample call
-`$ curl -d '{"_id":"5350eb54f9d135080453428b"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
+`$ curl -d '{"_id":"5350eb54f9d135080453428b"}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheets/5352c844463671180ee586ae/likes`
 
 ### Access likes for own photos
 Returns results for photos in own contact sheet or empty content if user has not liked enough of other users´ photos.
 
 #### URL
-`GET /api/sheet/:id/likes`
+`GET /api/sheets/:id/likes`
 
 #### Success responses
 `304`
@@ -140,7 +140,7 @@ Returns results for photos in own contact sheet or empty content if user has not
 `403, {message: 'Permission denied'}`
 
 #### Sample call
-`curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet/5352c844463671180ee586ae/likes`
+`curl -i -H "Accept: application/json" http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheets/5352c844463671180ee586ae/likes`
 
 ## Client considerations
 The client should store user credentials needed to authenticate. The client should also store the ID for its current contact sheet.
