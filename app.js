@@ -17,7 +17,7 @@ var multipartMiddleware = multipart();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.set('photosPublicDir', 'photos')
+app.set('photosPublicDir', '/photos')
 app.set('photosFullDir', path.join(__dirname, 'public',
     app.get('photosPublicDir')));
 
@@ -55,7 +55,8 @@ app.post('/api/sheets', api.auth, sheet.create);
 app.get('/api/sheets/:id/likes', api.auth, like.read);
 app.post('/api/sheets/:id/likes', api.auth, like.create);
 app.get('/api/photos', api.auth, photo.random);
-app.post('/api/photos', api.auth, multipartMiddleware, photo.create(app.get('photosFullDir'), app.get('photosPublicDir')));
+app.post('/api/photos', api.auth, multipartMiddleware,
+    photo.create(app.get('photosFullDir'), app.get('photosPublicDir')));
 
 
 http.createServer(app).listen(app.get('port'), function(){
