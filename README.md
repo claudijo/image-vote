@@ -68,10 +68,10 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `POST /api/sheet`
 
 #### Data params
-`{photos: [Array(String)]}`
+`{photoIds: [Array(String)]}`
 
 #### Success response
-`201, {_id: [String], userId: [String], voteCount: [Number], photos: [Array(String)]}`
+`201, {_id: [String], userId: [String], voteCount: [Number], photos: [Array(Photo)]}`
 
 #### Error responses
 `404, {message: 'User not found'}`
@@ -81,7 +81,7 @@ The contact sheet holds a collection of photos, and keeps track of how many othe
 `400, {message: 'Minimum of X photos must be provided'}`
 
 #### Sample call
-`$ curl -d '{"photos":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
+`$ curl -d '{"photoIds":["5352a2133fad13b40bdd64b1","5352bf963fad13b40bdd64b2"]}' -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://hello%40example.org:qwerty@127.0.0.1:3000/api/sheet`
 
 ### Get Photos
 The user can access a list of random photos of other users. Two photos are returned by default.

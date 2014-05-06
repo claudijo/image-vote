@@ -10,22 +10,22 @@ exports.create = function(req, res, next) {
       return res.json(404, {message: 'User not found'});
     }
 
-    if (!Array.isArray(req.body.photos)) {
+    if (!Array.isArray(req.body.photoIds)) {
       return res.json(400, {message: 'Missing photos'});
     }
 
-    if (req.body.photos.length < config.minPhotosPerSheet) {
+    if (req.body.photoIds.length < config.minPhotosPerSheet) {
       return res.json(400, {message: 'Minimum of ' + config.minPhotosPerSheet +
           ' photos must be provided'});
     }
 
     Photo.find({
       _id: {
-        $in: req.body.photos
+        $in: req.body.photoIds
       }
     }, function(err, photos) {
       if (err) return next(err);
-      if (photos.length < req.body.photos.length) {
+      if (photos.length < req.body.photoIds.length) {
         return res.json(400, {message: 'Missing photo'});
       }
 
