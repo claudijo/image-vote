@@ -62,6 +62,8 @@ exports.create = function(req, res, next) {
           return res.json(404, {message: 'Photo not found'});
         }
 
+        // TODO: Make sure we don't supply photos that have already been liked
+
         if (photo.likedBy.indexOf(user._id) !== -1) {
           return res.json(400, {message: 'Photo already liked by user'});
         }
